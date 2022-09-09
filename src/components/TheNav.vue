@@ -2,7 +2,7 @@
   <header class="bg-primary">
     <nav class="container mx-auto justify-between p-6 flex items-center">
       <h1>Where in the world?</h1>
-      <img :src="require('')" alt="">
+      <img  alt="">
       <button class="" @click="darkMode()">
         clickclick
       </button>
@@ -29,7 +29,7 @@ export default {
 <style lang="scss" scoped>
 
 .bg-primary {
-  @apply bg-white dark:bg-orange-400;
+  @apply bg-white dark:bg-elementDark;
 }
 
 h1 {
