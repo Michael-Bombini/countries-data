@@ -27,17 +27,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg-header {
-  @apply bg-white dark:bg-elementDark;
-}
-
-.text {
-  @apply text-textLight dark:text-darkTextLightEl;
-}
-
-* {
-  transition: background-color ease 0.5s, color ease 0.4s;
-}
 
 h1 {
   font-size: 1.2rem;

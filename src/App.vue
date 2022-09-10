@@ -20,6 +20,21 @@ export default{
 
 <style>
 
+.bg-header {
+  @apply bg-white dark:bg-elementDark;
+}
+
+.bg-main {
+  @apply bg-backgroundLight dark:bg-backgroundDark;
+}
+
+.text {
+  @apply text-textLight dark:text-darkTextLightEl;
+}
+
+/* * {
+  transition: background-color ease 0.5s, color ease 0.4s;
+} */
 
 
 </style>

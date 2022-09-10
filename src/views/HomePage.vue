@@ -1,13 +1,15 @@
 <template>
-  <div>
-    Lorem ipsum dolor sit amet.
-  </div>
+  <main class="bg-main">
+    <CountriesList/>
+  </main>
 </template>
 
 <script>
+import CountriesList from '@/components/CountriesList.vue';
   export default {
-    name : "HomePage",
-  }
+    name: "HomePage",
+    components: { CountriesList }
+}
 </script>
 
 <style lang="scss" scoped>
