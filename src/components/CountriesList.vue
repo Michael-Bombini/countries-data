@@ -1,15 +1,9 @@
 <template>
   <section class="container mx-auto">
-    <input type="text" name="" id="" v-model="countryName" @keyup="filterCountry()" class="border-red-500 border" placeholder="Search country">
+    <input type="text" name="" id="" v-model="countryName" class="border-red-500 border" placeholder="Search country">
     <div class="container mx-auto py-12 text">
-      <div class="grid grid-cols-4 gap-12" v-if="countriesFilter.length === 0">
-        <div v-for="(country, i) in countries" :key="i" class="">
-          <TheCountry :country="country" />
-        </div>
-      </div>
-
-      <div class="grid grid-cols-4 gap-12" v-else>
-        <div v-for="(country, i) in countriesFilter" :key="i" class="">
+      <div class="grid grid-cols-4 gap-12">
+        <div v-for="(country, i) in countriesList" :key="i" class="">
           <TheCountry :country="country" />
         </div>
       </div>
@@ -28,7 +22,6 @@ export default {
     return {
       countries: [],
       countryName : "",
-      countriesFilter : [],
     };
   },
   methods: {
@@ -37,17 +30,16 @@ export default {
         this.countries = resp.data;
       });
     },
-    filterCountry() {
-      this.countriesFilter = []
-      let countrySearched = this.countryName.trim().toLowerCase();
+  
+  },
+  computed : {
+    countriesList(){
+      if(this.countryName.trim().length === 0)
+        return this.countries;
+      else 
+      return this.countries.filter((country) => country.name.common.toLowerCase().includes(this.countryName.toLowerCase()));
+        
 
-      this.countries.forEach(element => {
-        let countryName = element.name.common.toLowerCase();
-
-        if(countryName.includes(countrySearched))
-          this.countriesFilter.push(element);
-
-      });
 
     }
   },
