@@ -1,11 +1,21 @@
 <template>
-  <div class="container mx-auto py-12 text">
-    <div class="columns-4">
-      <div v-for="(country, i) in countries" :key="i" class="m-4">
-        <TheCountry :country="country"/>
+  <section class="container mx-auto">
+    <input type="text" name="" id="" v-model="countryName" @keyup="filterCountry()" class="border-red-500 border" placeholder="Search country">
+    <div class="container mx-auto py-12 text">
+      <div class="grid grid-cols-4 gap-12" v-if="countriesFilter.length === 0">
+        <div v-for="(country, i) in countries" :key="i" class="">
+          <TheCountry :country="country" />
+        </div>
       </div>
+
+      <div class="grid grid-cols-4 gap-12" v-else>
+        <div v-for="(country, i) in countriesFilter" :key="i" class="">
+          <TheCountry :country="country" />
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -17,6 +27,8 @@ export default {
   data() {
     return {
       countries: [],
+      countryName : "",
+      countriesFilter : [],
     };
   },
   methods: {
@@ -25,6 +37,19 @@ export default {
         this.countries = resp.data;
       });
     },
+    filterCountry() {
+      this.countriesFilter = []
+      let countrySearched = this.countryName.trim().toLowerCase();
+
+      this.countries.forEach(element => {
+        let countryName = element.name.common.toLowerCase();
+
+        if(countryName.includes(countrySearched))
+          this.countriesFilter.push(element);
+
+      });
+
+    }
   },
   mounted() {
     this.fetchData();
