@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
-
+import CountryInfo from '../views/CountryInfo.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -10,6 +10,11 @@ const routes = [
     name: 'home',
     component: HomePage,
   },
+  {
+    path : '/country/:name',
+    name : 'countryInfo',
+    component : CountryInfo,
+  }
 ]
 
 const router = new VueRouter({

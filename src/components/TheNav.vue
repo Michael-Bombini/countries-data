@@ -4,7 +4,7 @@
       <h1>Where in the world?</h1>
 
       <button class="text font-semibold" @click="darkMode()">
-        <span class="mr-1"> &#9790; </span>
+        <span class="mr-1"> <i class="fa-solid fa-moon"></i></span>
         Dark Mode
       </button>
     </nav>
