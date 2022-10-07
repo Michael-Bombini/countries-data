@@ -15,10 +15,10 @@
           <img src="" alt="" /><img :src="flag" alt="" />
         </div>
         <div class="w-2/4 py-12 text">
-          <h2>{{ this.$route.params.name }}</h2>
+          <h2>{{ country.name }}</h2>
           <div class="flex flex-col md:flex-row md:gap-8">
             <ul>
-              <li><strong class="mr-1">Native Name: </strong>{{ native }}</li>
+              <li><strong class="mr-1">Native Name: </strong>{{ country.nativeName }}</li>
               <li>
                 <strong class="mr-1">Population: </strong> {{ population }}
               </li>
