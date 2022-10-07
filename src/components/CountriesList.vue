@@ -118,6 +118,7 @@ i {
   left: 50%;
   font-size: 3rem;
   transform: translate(-50% , -50%);
+  border-bottom: 2px solid #3af;
 }
 
 </style>
