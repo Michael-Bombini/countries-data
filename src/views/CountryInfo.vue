@@ -7,17 +7,55 @@
           <span class="mx-1">Back</span></router-link
         >
       </div>
-      <div class="flex justify-between" v-if="country">
-        <div class="w-2/5"><img src="" alt=""><img :src="country[0].flags.svg" alt=""></div>
+      <div
+        class="flex flex-col md:flex-row items-center justify-between"
+        v-if="country"
+      >
+        <div class="p-4 img-container md:w-2/6 lg:w-2/5">
+          <img src="" alt="" /><img :src="flag" alt="" />
+        </div>
         <div class="w-2/4 py-12 text">
-          <h2>{{country[0].name.common}}</h2>
-          <ul>
-            <li><strong class="mr-1">Native Name: </strong>{{country[0].name.nativeName.isl.official}}</li>
-            <li><strong class="mr-1">Population: </strong>{{country[0].population.toLocaleString('en')}}</li>
-            <li><strong class="mr-1">Region: </strong>{{country[0].region}}</li>
-            <li><strong class="mr-1">Sub Region: </strong>{{country[0].subregion}}</li>
-            <li><strong class="mr-1">Capital: </strong>{{country[0].capital[0]}}</li>
-          </ul>
+          <h2>{{ this.$route.params.name }}</h2>
+          <div class="flex flex-col md:flex-row md:gap-8">
+            <ul>
+              <li><strong class="mr-1">Native Name: </strong>{{ native }}</li>
+              <li>
+                <strong class="mr-1">Population: </strong> {{ population }}
+              </li>
+              <li><strong class="mr-1">Region: </strong>{{ region }}</li>
+              <li><strong class="mr-1">Sub Region: </strong>{{ subRegion }}</li>
+              <li><strong class="mr-1">Capital: </strong>{{ capital }}</li>
+            </ul>
+            <ul>
+              <li><strong class="mr-1">Top Level Domain: </strong>{{ tld }}</li>
+              <li>
+                <strong>Currencies: </strong>
+                <span
+                  class="mr-1"
+                  v-for="currency in currencies"
+                  :key="currency.name"
+                  >{{ currency.name }}</span
+                >
+              </li>
+              <li>
+                <strong class="mr-1">Languages: </strong>
+                <span v-for="language in languages" :key="language.name">
+                  {{ language.name }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            v-for="border in borders"
+            :key="border"
+            class="inline-block m-2 bg-header shadow py-2 px-4"
+          >
+            <router-link
+              :to="{ name: 'countryInfo', params: { name: border } }"
+            >
+              {{ border }}
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -30,16 +68,41 @@ export default {
   name: "CountryInfo",
   data() {
     return {
-      country : [],
+      country: [],
+      flag: null,
+      native: null,
+      population: null,
+      region: null,
+      subRegion: null,
+      capital: [],
+      tld: [],
+      currencies: [],
+      languages: [],
+      borders: [],
     };
+  },
+  watch: {
+    $route: {
+      handler: "fetchCountry",
+      immediate: true,
+    },
   },
   methods: {
     fetchCountry() {
       axios
-        .get("https://restcountries.com/v3.1/name/" + this.$route.params.name)
+        .get("https://restcountries.com/v2/alpha/" + this.$route.params.name)
         .then((resp) => {
-          console.log(resp.data);
           this.country = resp.data;
+          this.flag = this.country.flags.svg;
+          this.native = this.country.name.official;
+          this.population = this.country.population.toLocaleString();
+          this.region = this.country.region;
+          this.subRegion = this.country.subregion;
+          this.capital = this.country.capital;
+          this.tld = this.country.topLevelDomain[0];
+          this.currencies = this.country.currencies;
+          this.languages = this.country.languages;
+          this.borders = this.country.borders;
         });
     },
   },
@@ -62,5 +125,12 @@ h2 {
 li {
   font-size: 1.2rem;
   margin: 0.8rem 0;
+}
+
+img {
+  max-width: 100%;
+}
+ul {
+  width: 50%;
 }
 </style>

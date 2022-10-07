@@ -13,7 +13,12 @@
         />
       </div>
 
-      <select name="region" class="bg-header text py-2 px-5 rounded-sm" id="region" v-model="countryRegion">
+      <select
+        name="region"
+        class="bg-header text py-2 px-5 rounded-sm"
+        id="region"
+        v-model="countryRegion"
+      >
         <option value="">Filter by Region</option>
         <option value="africa">Africa</option>
         <option value="americas">America</option>
@@ -27,15 +32,16 @@
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
         <div v-for="(country, i) in countriesList" :key="i" class="">
           <router-link
-            :to="{ name: 'countryInfo', params: { name: country.name.common } }"
+            :to="{ name: 'countryInfo', params: { name: country.cca3 } }"
           >
             <TheCountry :country="country" />
           </router-link>
         </div>
       </div>
-      <div v-if="countriesList.length === 0" class="text-center text-4xl">
+      <div v-if="countriesList.length === 0 && loading" class="text-center text-4xl">
         No results found!
       </div>
+      <div v-else-if="loading===false" class="LOADER">Loading data...</div>
     </div>
   </section>
 </template>
@@ -51,12 +57,14 @@ export default {
       countries: [],
       countryName: "",
       countryRegion: "",
+      loading : false,
     };
   },
   methods: {
     fetchData() {
       axios.get("https://restcountries.com/v3.1/all").then((resp) => {
         this.countries = resp.data;
+        this.loading = true;
       });
     },
   },
@@ -103,4 +111,13 @@ i {
   top: 15px;
   left: 15px;
 }
+
+.LOADER {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 3rem;
+  transform: translate(-50% , -50%);
+}
+
 </style>

@@ -5,7 +5,9 @@
     </div>
     <div class="p-6 bg-header">
       <h2>{{ country.name.common }}</h2>
-      <div class="mt-1"><strong>Population: </strong>{{ country.population }}</div>
+      <div class="mt-1">
+        <strong>Population: </strong>{{ country.population }}
+      </div>
       <div class="mt-1"><strong>Region: </strong>{{ country.region }}</div>
 
       <strong class="mt-1">Capital: </strong>
@@ -46,5 +48,4 @@ img {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-
 </style>
