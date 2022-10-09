@@ -20,6 +20,10 @@ export default{
 
 <style>
 
+* {
+  transition: background 0.5s ease;
+}
+
 .bg-header {
   @apply bg-white dark:bg-elementDark;
 }
