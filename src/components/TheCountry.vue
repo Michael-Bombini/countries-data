@@ -6,7 +6,7 @@
     <div class="p-6 bg-header">
       <h2>{{ country.name.common }}</h2>
       <div class="mt-1">
-        <strong>Population: </strong>{{ country.population }}
+        <strong>Population: </strong>{{ country.population.toLocaleString() }}
       </div>
       <div class="mt-1"><strong>Region: </strong>{{ country.region }}</div>
 
