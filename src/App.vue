@@ -19,9 +19,10 @@ export default{
 </script>
 
 <style>
-
+html , body {overflow-x: hidden;}
 * {
   transition: background 0.8s ease;
+
 }
 
 .bg-header {
