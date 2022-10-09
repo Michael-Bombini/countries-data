@@ -21,7 +21,7 @@ export default{
 <style>
 
 * {
-  transition: background 0.5s ease;
+  transition: background 0.8s ease;
 }
 
 .bg-header {
